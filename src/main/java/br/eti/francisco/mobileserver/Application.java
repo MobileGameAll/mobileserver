@@ -105,6 +105,8 @@ public class Application {
         dataSource.setUrl("jdbc:postgresql://localhost:5432/mobileserver");
         dataSource.setUsername("openmultiplayer");
         dataSource.setPassword("open#$@198A");
+//        dataSource.setUsername("postgres");
+//        dataSource.setPassword("123456");
         return dataSource;
     }    
 

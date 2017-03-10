@@ -17,6 +17,12 @@ public class Person {
 	private String name;
 	
 	private String phone;
+	
+	private String email;
+	
+	private String facebookId;
+	
+	private String gender;
 
 	public String getName() {
 		return name;
@@ -37,6 +43,30 @@ public class Person {
 	public Integer getId() {
 		return id;
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 	
 	
 }
