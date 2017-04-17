@@ -29,10 +29,15 @@ public class PersonController {
 		return target;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Person person(@PathVariable int id) {
-		return personDao.findOne(id);
-	}
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Person person(@PathVariable int id) {
+        return personDao.findOne(id);
+    }
+
+    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+    public List<Person> person(@PathVariable String name) {
+        return personDao.listByName("%" + name + "%");
+    }
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@RequestBody Person person) {
