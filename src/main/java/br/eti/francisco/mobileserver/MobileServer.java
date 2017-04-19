@@ -28,11 +28,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan(basePackageClasses = {Application.class})
-public class Application {
+@ComponentScan(basePackageClasses = {MobileServer.class})
+public class MobileServer {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(MobileServer.class, args);
 	}
 
 
