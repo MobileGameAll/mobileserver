@@ -74,4 +74,12 @@ public class Desafio {
     public Integer getId() {
         return id;
     }
+    public Categoria getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    
 }

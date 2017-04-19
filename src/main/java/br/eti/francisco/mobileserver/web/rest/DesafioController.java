@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.eti.francisco.mobileserver.model.Categoria;
 import br.eti.francisco.mobileserver.model.Desafio;
+import br.eti.francisco.mobileserver.model.Person;
 import br.eti.francisco.mobileserver.repository.CategoriaDao;
 import br.eti.francisco.mobileserver.repository.DesafioDao;
 import br.eti.francisco.mobileserver.repository.JogadorDao;
@@ -44,6 +48,14 @@ public class DesafioController {
     @RequestMapping(value = "/desafio/byLastId/{id}", method = RequestMethod.GET)
     public List<Desafio> desafio(@PathVariable Integer id) {
         return desafioDao.listByLastId(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> saveDesafio(@RequestBody Desafio desafio) {
+        Categoria cat = categoriaDao.findOne(1);
+        desafio.setCategoria(cat);
+        desafioDao.save(desafio);
+        return ResponseEntity.ok(null);
     }
 
 
