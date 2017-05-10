@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.eti.francisco.mobileserver.model.Categoria;
 import br.eti.francisco.mobileserver.model.Desafio;
-import br.eti.francisco.mobileserver.model.Person;
+import br.eti.francisco.mobileserver.model.Jogador;
+import br.eti.francisco.mobileserver.repository.CartaJogadorDao;
 import br.eti.francisco.mobileserver.repository.CategoriaDao;
+import br.eti.francisco.mobileserver.repository.DeckJogadorDao;
 import br.eti.francisco.mobileserver.repository.DesafioDao;
 import br.eti.francisco.mobileserver.repository.JogadorDao;
 
@@ -32,13 +34,20 @@ public class DesafioController {
     @Autowired
     private CategoriaDao categoriaDao;
 
+    @Autowired
+    private DeckJogadorDao deckJogadorDao;
+
+    @Autowired
+    private CartaJogadorDao cartaJogadorDao;
+
+    
     
     @RequestMapping(value="/desafio", method = RequestMethod.GET)
-	public List<Desafio> desafio() {
-		List<Desafio> target = new ArrayList<>();
-		desafioDao.findAll().forEach(target::add);
-		return target;
-	}
+    public List<Desafio> desafio() {
+        List<Desafio> target = new ArrayList<>();
+        desafioDao.findAll().forEach(target::add);
+        return target;
+    }
 
     @RequestMapping(value = "/desafio/{id}", method = RequestMethod.GET)
     public Desafio desafio(@PathVariable int id) {
@@ -50,11 +59,31 @@ public class DesafioController {
         return desafioDao.listByLastId(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/desafio", method = RequestMethod.POST)
     public ResponseEntity<Void> saveDesafio(@RequestBody Desafio desafio) {
         Categoria cat = categoriaDao.findOne(1);
         desafio.setCategoria(cat);
         desafioDao.save(desafio);
+        return ResponseEntity.ok(null);
+    }
+
+
+    @RequestMapping(value="/jogador", method = RequestMethod.GET)
+    public List<Jogador> jogador() {
+        List<Jogador> target = new ArrayList<>();
+        jogadorDao.findAll().forEach(target::add);
+        return target;
+    }
+
+    @RequestMapping(value = "/jogador/{id}", method = RequestMethod.GET)
+    public Jogador jogador(@PathVariable int id) {
+        return jogadorDao.findOne(id);
+    }
+
+
+    @RequestMapping(value = "/jogador", method = RequestMethod.POST)
+    public ResponseEntity<Void> saveJogador(@RequestBody Jogador jogador) {
+        jogadorDao.save(jogador);
         return ResponseEntity.ok(null);
     }
 

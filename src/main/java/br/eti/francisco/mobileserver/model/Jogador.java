@@ -1,10 +1,16 @@
 package br.eti.francisco.mobileserver.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Jogador {
@@ -26,7 +32,16 @@ public class Jogador {
     
     @Column(unique=true)
     private String email;
+    
+    private int level;
+    
+    @OneToMany
+    @JoinColumn(name="cartajogador_id")
+    private List<CartaJogador> cartas = new ArrayList<>();
 
+    @OneToOne
+    private DeckJogador deck = new DeckJogador();
+    
     public String getNome() {
         return nome;
     }
@@ -78,4 +93,26 @@ public class Jogador {
     public Integer getId() {
         return id;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public List<CartaJogador> getCartas() {
+        return cartas;
+    }
+
+    public DeckJogador getDeck() {
+        return deck;
+    }
+
+    public void setDeck(DeckJogador deck) {
+        this.deck = deck;
+    }
+
+    
 }
