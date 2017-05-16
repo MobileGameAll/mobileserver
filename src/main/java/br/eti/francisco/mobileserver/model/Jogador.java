@@ -3,6 +3,7 @@ package br.eti.francisco.mobileserver.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class Jogador {
     @JoinColumn(name="cartajogador_id")
     private List<CartaJogador> cartas = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private DeckJogador deck = new DeckJogador();
     
     public String getNome() {
