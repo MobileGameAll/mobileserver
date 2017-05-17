@@ -82,9 +82,9 @@ public class DesafioController {
 
 
     @RequestMapping(value = "/jogador", method = RequestMethod.POST)
-    public ResponseEntity<Void> saveJogador(@RequestBody Jogador jogador) {
+    public ResponseEntity<Integer> saveJogador(@RequestBody Jogador jogador) {
         jogadorDao.save(jogador);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(jogador.getId());
     }
 
 
