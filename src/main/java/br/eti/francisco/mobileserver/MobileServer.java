@@ -31,7 +31,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackageClasses = {MobileServer.class})
 public class MobileServer {
 
-	public static void main(String[] args) throws Exception {
+    @Autowired
+    private DataSource dataSource;
+
+    public static void main(String[] args) throws Exception {
 		SpringApplication.run(MobileServer.class, args);
 	}
 
@@ -83,7 +86,7 @@ public class MobileServer {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
     	LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-    	em.setDataSource(dataSource());
+    	em.setDataSource(dataSource);
     	em.setJpaVendorAdapter(jpaVendorAdapter());
     	em.setPackagesToScan("br.eti.francisco.mobileserver.model");
     	return em;
@@ -98,18 +101,6 @@ public class MobileServer {
     	return jpaVendorAdapter;
     }
     
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/mobileserver");
-        dataSource.setUsername("openmultiplayer");
-        dataSource.setPassword("open#$@198A");
-//        dataSource.setUsername("postgres");
-//        dataSource.setPassword("123456");
-        return dataSource;
-    }    
-
     private Predicate<String> personPaths() {
         return PathSelectors.regex("/person.*");
     }
